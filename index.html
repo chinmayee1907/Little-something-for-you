@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Little Something for You ♡</title>
+<style>
+:root{--cream:#fff9f3;--paper:#fffdf9;--rose:#d97f8b;--rose-dark:#9e4f60;--ink:#493b3c;--muted:#8d7777;--line:#f0dfda;--shadow:0 18px 55px rgba(123,76,79,.12)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:radial-gradient(circle at 12% 8%,#f8e5e4 0,transparent 28%),radial-gradient(circle at 92% 90%,#e8eee2 0,transparent 30%),var(--cream);color:var(--ink);font-family:ui-rounded,"Trebuchet MS",system-ui,sans-serif}
+body{overflow:hidden}
+button{font:inherit;cursor:pointer}
+.app{height:100dvh;display:flex;flex-direction:column;max-width:1100px;margin:auto;padding:18px 20px 14px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 2px 14px}
+.brand{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--rose-dark);font-weight:800}
+.tiny-heart{color:var(--rose);font-size:22px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:8px;background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:999px;width:max-content;max-width:100%;margin:0 auto 14px}
+.tab{border:0;background:transparent;color:var(--muted);padding:10px 16px;border-radius:999px;font-size:14px;transition:.2s}
+.tab.active{background:var(--rose);color:white;box-shadow:0 5px 14px #d97f8b33}
+main{flex:1;min-height:0;display:flex}
+.panel{display:none;width:100%;min-height:0;overflow:auto;animation:fade .25s ease}
+.panel.active{display:flex;align-items:center;justify-content:center}
+.panel-inner{width:min(100%,850px);margin:auto;background:rgba(255,253,249,.9);border:1px solid #f1dfda;border-radius:28px;box-shadow:var(--shadow);padding:clamp(22px,4vw,42px);position:relative}
+.kicker{color:var(--rose-dark);font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;margin:0 0 12px}
+h1,h2{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.03em;margin:0 0 14px}
+h1{font-size:clamp(36px,6vw,62px);line-height:1.02} h2{font-size:clamp(27px,4vw,40px)}
+p{line-height:1.7;font-size:16px;color:#6e595a;margin:10px 0}
+.lead{font-size:clamp(17px,2vw,20px);line-height:1.65;max-width:650px}
+button.primary{border:0;background:var(--rose-dark);color:white;border-radius:999px;padding:13px 20px;box-shadow:0 7px 18px #9e4f6024}
+button.soft{border:1px solid var(--line);background:#fff8f6;color:var(--rose-dark);border-radius:999px;padding:12px 17px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.sticker{display:inline-block;background:#f8e8e6;border-radius:16px;padding:10px 14px;color:var(--rose-dark);transform:rotate(-2deg);font-size:13px;margin:18px 0 4px}
+.home-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}
+.doodle{border-radius:24px;background:linear-gradient(145deg,#f8e4e2,#f3eee4);min-height:260px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.big-heart{font-size:94px;filter:drop-shadow(0 12px 8px #9e4f6022);animation:float 3.5s ease-in-out infinite}
+.spark{position:absolute;color:#b46e7a;font-size:20px}.s1{top:18%;left:19%}.s2{top:23%;right:18%;font-size:14px}.s3{bottom:18%;left:25%;font-size:15px}.s4{bottom:22%;right:22%}
+.apology{max-width:720px}.apology p{font-size:16px;line-height:1.68}
+.signature{font-family:Georgia,serif;font-style:italic;color:var(--rose-dark);font-size:22px;margin-top:20px}
+.memory-layout{display:grid;grid-template-columns:1fr .8fr;gap:22px;align-items:center}
+.memory-note{background:#f9eee8;border-radius:20px;padding:22px}
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:20px}
+.photo-card{margin:0;background:white;border:1px solid var(--line);border-radius:16px;padding:8px;box-shadow:0 6px 18px #75464a0c}
+.photo-card img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:11px;background:#f6e8e6}
+.photo-card figcaption{font-size:12px;line-height:1.4;color:var(--muted);padding:8px 2px 3px}
+.game-card{text-align:center;max-width:640px}
+.progress{display:flex;justify-content:center;gap:7px;margin:20px 0}.dot{width:8px;height:8px;border-radius:50%;background:#ead4d3}.dot.on{background:var(--rose-dark)}
+.question{font-family:Georgia,serif;font-size:clamp(24px,4vw,34px);line-height:1.25;margin:15px 0 22px}
+.choices{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.game-result{min-height:30px;color:var(--rose-dark);font-weight:700;margin-top:18px}
+.close-note{font-size:13px;color:var(--muted);margin-top:15px}
+@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-9px) rotate(4deg)}}
+@media(max-width:700px){.app{padding:10px 10px 8px}.top{padding-bottom:8px}.tabs{margin-bottom:9px;gap:3px;padding:5px}.tab{padding:9px 11px;font-size:12px}.panel.active{align-items:flex-start}.panel-inner{padding:23px 20px;border-radius:22px;margin:auto 0}.home-grid,.memory-layout{grid-template-columns:1fr}.doodle{min-height:120px;max-height:140px;order:-1}.big-heart{font-size:60px}.gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.photo-card figcaption{font-size:11px}.apology p{font-size:15px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><div class="brand">A little something for you</div><div class="tiny-heart">♡</div></header>
+<nav class="tabs" aria-label="Website sections">
+<button class="tab active" data-tab="home">A little surprise</button>
+<button class="tab" data-tab="note">From Chinu</button>
+<button class="tab" data-tab="memories">Our little things</button>
+<button class="tab" data-tab="game">Tiny game</button>
+</nav>
+<main>
+<section class="panel active" id="home">
+<div class="panel-inner home-grid">
+<div>
+<p class="kicker">For my Baby, from your Chinu ♡</p>
+<h1>Hi Baby,<br>a little something.</h1>
+<p class="lead">I made this for you. I hope it makes you smile. ❤️</p>
+<div class="sticker">just for you, okay? ♡</div>
+<div class="actions"><button class="primary" onclick="showTab('note')">Okay, tell me ♡</button></div>
+</div>
+<div class="doodle" aria-hidden="true"><span class="spark s1">✦</span><span class="spark s2">♡</span><span class="spark s3">✧</span><span class="spark s4">✦</span><div class="big-heart">♥</div></div>
+</div>
+</section>
+<section class="panel active" id="note" style="display:none">
+<div class="panel-inner apology">
+<p class="kicker">Just one honest message</p>
+<h2>Baby, I am really sorry. ♡</h2>
+<p>Baby, ❤️</p>
+<p>I know I have messed up, and I am sorry I have made you feel that way. I know being far away is already hard, and I don't want my actions to make it harder or leave you feeling alone.</p>
+<p>I can't use being busy or tired as an excuse. I love you, and I know I lack at expressing it. I understand that where you are coming from and I am really very sorry. I will try my best to not make you feel that way ever again. I am very grateful to have you in my life.</p>
+<p>You do so much, Baby, and I see how hard you work and how much you care about me, even when you are upset. I am so lucky to have you. I know a little website can't fix things, and I'm not asking you to stop being hurt just because I made this. I just wanted you to know that I understand, I am sorry, and I want to do better. I love you a lot. When you are ready, can we have a little us time? No distractions, just you and me. ❤️</p>
+<div class="signature">Your Chinu ♡</div>
+<div class="actions"><button class="soft" onclick="showTab('memories')">Can I show you something? →</button></div>
+</div>
+</section>
+<section class="panel" id="memories">
+<div class="panel-inner">
+<p class="kicker">Little things that are ours</p>
+<h2>The moment I knew it was you. ♡</h2>
+<div class="memory-layout">
+<div class="memory-note">
+<p>I still remember how heartbroken I was after my CAT exam. I was so disappointed that I almost didn't want to give my NMAT exam. I had pretty much given up on myself, but you didn't let me. You cheered me up, stayed on call with me and were there with me all the way until I reached the exam centre. I don't think you even realize how much that meant to me.</p>
+<p>I ended up scoring 224, and that score helped me get into the MBA college I am in today. Sometimes I think about how different things could have been if you hadn't encouraged me that day. You gave me a reason to try when I didn't have one myself. And somewhere in that moment, I realized it was you. It was always going to be you. ❤️</p>
+</div>
+<div>
+<p>Some moments stay with you because of how someone made you feel. I'll always remember how you showed up for me that day.</p>
+<div class="close-note">And yes, I'm still very grateful you didn't let me give up. ❤️</div>
+</div>
+</div>
+<h2 style="font-size:28px;margin-top:26px">A few little pieces of you</h2>
+<div class="gallery"><figure class="photo-card"><img src="photos/memory-01.jpeg" alt="Photo memory 1"><figcaption>Wish I could just reach through this picture and hug you. ♡</figcaption></figure>
+<figure class="photo-card"><img src="photos/memory-02.jpeg" alt="Photo memory 2"><figcaption>One of those pictures I keep coming back to.</figcaption></figure>
+<figure class="photo-card"><img src="photos/memory-03.jpeg" alt="Photo memory 3"><figcaption>My favourite face, even when I can&#x27;t see you in person. ❤️</figcaption></figure>
+<figure class="photo-card"><img src="photos/memory-04.jpeg" alt="Photo memory 4"><figcaption>If I could be anywhere right now, I&#x27;d probably choose wherever you are.</figcaption></figure>
+<figure class="photo-card"><img src="photos/memory-05.jpeg" alt="Photo memory 5"><figcaption>Just you being you, and me missing you a little extra.</figcaption></figure>
+<figure class="photo-card"><img src="photos/memory-06.jpeg" alt="Photo memory 6"><figcaption>Keeping this one close until I can see you again.</figcaption></figure>
+<figure class="photo-card"><img src="photos/memory-07.jpeg" alt="Photo memory 7"><figcaption>A little reminder of my favourite person.</figcaption></figure>
+<figure class="photo-card"><img src="photos/memory-08.jpeg" alt="Photo memory 8"><figcaption>This picture deserves a real-life hug, honestly. 🫂</figcaption></figure></div>
+<div class="memory-note" style="margin-top:18px">
+<p><strong>And our song, Tu Muskuraye. 🎵</strong></p>
+<p>I still remember you sending it to me. It's one of those little things that makes me feel close to you, even when you're far away.</p>
+</div>
+</div>
+</section>
+<section class="panel" id="game">
+<div class="panel-inner game-card">
+<p class="kicker">A tiny Chinu-made quiz</p>
+<h2>Let's see if you remember us ♡</h2>
+<div class="progress"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+<div class="question" id="question">Where did we go together before the USA?</div>
+<div class="choices" id="choices"></div>
+<div class="game-result" id="result" aria-live="polite"></div>
+<div class="actions" style="justify-content:center"><button class="primary" id="next" onclick="nextQuestion()" style="display:none">Next one →</button></div>
+<div class="close-note"></div>
+</div>
+</section>
+</main>
+<footer class="footer">22 July 2025 · Tu Muskuraye · our little walks · ♡</footer>
+</div>
+<script>
+const tabs=[...document.querySelectorAll('.tab')], panels=[...document.querySelectorAll('.panel')];
+function showTab(id){tabs.forEach(t=>t.classList.toggle('active',t.dataset.tab===id));panels.forEach(p=>{p.classList.toggle('active',p.id===id);p.style.display=p.id===id?'flex':'none';});}
+tabs.forEach(t=>t.addEventListener('click',()=>showTab(t.dataset.tab)));
+const qs=[
+{q:'Where did we go together before the USA?',a:['Siddhi Vinayak 🛕','A random mall 🛍️','A beach date 🌊'],correct:0,good:'Siddhi Vinayak! One of my favourite memories with you. ♡'},
+{q:'When was our very first date?',a:['2 May 2025 ❤️','22 July 2025','14 February 2025'],correct:0,good:'2 May 2025! How could you forget our first date? ❤️'},
+{q:'When did we officially start dating?',a:['2 May 2025','22 July 2025 ❤️','1 August 2025'],correct:1,good:'22 July 2025! The day we officially became us. ♡'}
+];
+let qi=0;
+function renderQ(){const q=qs[qi];document.getElementById('question').textContent=q.q;document.getElementById('choices').innerHTML=q.a.map((x,i)=>`<button class="soft" onclick="answer(${i})">${x}</button>`).join('');document.getElementById('result').textContent='';document.getElementById('next').style.display='none';document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i<=qi));}
+function answer(i){const q=qs[qi];document.getElementById('result').textContent=i===q.correct?q.good:'Haha, nice try, Baby. Think again 😌';if(i===q.correct)document.getElementById('next').style.display='inline-block';}
+function nextQuestion(){if(qi<qs.length-1){qi++;renderQ();}else{document.getElementById('question').textContent='Okay, you passed. Come collect your hug. 🫂';document.getElementById('choices').innerHTML='<button class="primary" onclick="showTab(\'note\')">Read my message again ♡</button>';document.getElementById('result').textContent='Your prize: a virtual date with your Chinu.';document.getElementById('next').style.display='none';document.querySelectorAll('.dot').forEach(d=>d.classList.add('on'));}}
+renderQ();
+</script>
+</body></html>
